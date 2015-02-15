@@ -1,0 +1,4 @@
+Beamer is a LaTeX class for creating slides for presentations. 
+It supports both pdfLaTeX and LaTeX + dvips. The name is taken from the German word Beamer, a pseudo-anglicism for video projector.
+One can make beautiful and structured presentation using all power of LaTex. You can install it in Linux distributions from your package manager.
+There are a few text color available by default like green, blue, and red.
