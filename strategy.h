@@ -1,3 +1,8 @@
+//Date        ID       Description
+//--------------------------------------
+//20150216   13208316  Added indentation to code to make it more readable.
+//--------------------------------------
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -14,10 +19,14 @@ using namespace std;
 
 class Formatter
 {
-public:
-  Formatter() {};
-  virtual ~Formatter() {};
-  virtual void justify(char *line, int width) = 0;
+    public:
+        Formatter()
+        {
+        };
+        virtual ~Formatter() 
+        {
+        };
+        virtual void justify(char *line, int width) = 0;
 private:
 };
 
@@ -37,16 +46,20 @@ private:
 
 class FileProcessor
 {
-public:
-  void outputFile();
- FileProcessor(char *fname, int width) : width_(max(MIN_LINE_LEN ,min(width,MAX_LINE_LEN))), filename_(fname),formatter(0) {};
-  virtual ~FileProcessor() {};
-protected:
-  virtual int inputLine(ifstream& fp, char *line);
-  void justify(char *line);
-  int width_;
-  string filename_;
-  Formatter *formatter;
+    public:
+        void outputFile();
+          public:  FileProcessor(char *fname, int width) : width_(max(MIN_LINE_LEN ,min(width,MAX_LINE_LEN))), filename_(fname),formatter(0) 
+        {
+        };
+        virtual ~FileProcessor() 
+        {
+        };
+    protected:
+        virtual int inputLine(ifstream& fp, char *line);
+        void justify(char *line);
+        int width_;
+        string filename_;
+	Formatter *formatter;
 };
 
 
@@ -55,11 +68,15 @@ protected:
 
 class UpperCaseFileProcessor : public FileProcessor
 {
-public:
- UpperCaseFileProcessor(char *fname, int width) : FileProcessor(fname, width) {};
-  virtual ~UpperCaseFileProcessor() {};
-private:
-  int inputLine(ifstream& inFile, char *line);
+    public:
+        UpperCaseFileProcessor(char *fname, int width) : FileProcessor(fname, width) 
+        {
+        };
+        virtual ~UpperCaseFileProcessor() 
+        {
+        };
+    private:
+	int inputLine(ifstream& inFile, char *line);
 };
 
 /* LeftFormatter implements the justify() function so that lines are written out with
@@ -67,10 +84,14 @@ private:
 
 class LeftFormatter : public Formatter
 {
-public:
-  LeftFormatter() {};
-  ~LeftFormatter() {};
-  void justify(char *line, int width);
+    public:
+        LeftFormatter() 
+        {
+        };
+        ~LeftFormatter() 
+        {
+        };
+        void justify(char *line, int width);
 };
 
 /* RightFormatter implements the justify() function so that lines are written out with
@@ -78,10 +99,14 @@ public:
 
 class RightFormatter: public Formatter
 {
-  public:
-  RightFormatter() {};
-  ~RightFormatter() {};
-  void justify(char *line, int width);
+    public:
+        RightFormatter() 
+        {
+        };
+        ~RightFormatter() 
+        {
+        };
+	void justify(char *line, int width);
 };
 
 
@@ -90,31 +115,55 @@ class RightFormatter: public Formatter
 
 class CenterFormatter: public Formatter
 {
-  public:
-  CenterFormatter() {};
-  ~CenterFormatter() {};
-  void justify(char *line, int width);
+	public:
+            CenterFormatter() 
+            {
+            };
+            ~CenterFormatter() 
+            {
+            };
+            void justify(char *line, int width);
 };
 
 class ProcessorLeft : public FileProcessor
 {
-public:
- ProcessorLeft(char *fname, int width) : FileProcessor(fname, width) { formatter = new LeftFormatter; };
-  ~ProcessorLeft()  {if (formatter) delete (LeftFormatter *)formatter;};
+	public:
+            ProcessorLeft(char *fname, int width) : FileProcessor(fname, width) 
+            { 
+                formatter = new LeftFormatter; 
+            };
+            ~ProcessorLeft()  {
+                if (formatter)
+                    delete (LeftFormatter *)formatter;
+            };
 };
 
 class ProcessorRight : public FileProcessor
 {
-public:
- ProcessorRight(char *fname, int width) : FileProcessor(fname, width) { formatter = new RightFormatter; }
-  ~ProcessorRight() {if (formatter) delete (RightFormatter *)formatter;};
+	public:
+		ProcessorRight(char *fname, int width) : FileProcessor(fname, width) 
+		{ 
+                    formatter = new RightFormatter; 
+		}
+		~ProcessorRight() 
+		{
+                    if (formatter)
+			delete (RightFormatter *)formatter;
+		};
 };
 
 class ProcessorCenter : public FileProcessor
 {
-public:
- ProcessorCenter(char *fname, int width) : FileProcessor(fname, width) { formatter = new CenterFormatter; }
-  ~ProcessorCenter() {if (formatter) delete (CenterFormatter *)formatter;};
+	public:
+            ProcessorCenter(char *fname, int width) : FileProcessor(fname, width) 
+            { 
+                formatter = new CenterFormatter; 
+            }
+            ~ProcessorCenter() 
+            {
+                if (formatter)
+                    delete (CenterFormatter *)formatter;
+            };
 };
 
 /*  TO BE COMPLETED:  DEFINE THE THREE CLASSES ProcessorUpperCaseLeft, ProcessorUpperCaseRight and ProcessorUpperCaseCentre 
